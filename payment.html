@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+</head>
+<style>
+    #paymentcontainer {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #paymentcontainer>form>input {
+        height: 30px;
+        width: 200px;
+    }
+
+    #secondPart {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #secondPart>input {
+        margin-top: 20px;
+        height: 30px;
+        width: 95px;
+
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    button {
+        margin-top: 20px;
+        height: 30px;
+        width: 210px;
+        background-color: blue;
+    }
+</style>
+
+<body>
+    <div id="paymentcontainer">
+        <form>
+            <p>Name</p>
+            <input type="text" placeholder="Gaurav Kumar" required>
+            <p>Card Number</p>
+            <input type="number" placeholder="1234 5678 1234 5678" id="cardnumber" required>
+
+            <div id="secondPart">
+                <input type="number" placeholder="Expiry Date" required id="expiry">
+                <input type="number" placeholder="CVV" required id="cvv">
+
+            </div>
+            <button id="payment">Payment</button>
+        </form>
+    </div>
+</body>
+
+<script>
+    document.querySelector("form").addEventListener("submit", function () {
+        event.preventDefault();
+        var cardnumber = document.getElementById("cardnumber").value;
+        var expiry = document.getElementById("expiry").value;
+        var cvv = document.getElementById("cvv").value;
+        if (cardnumber.length == 16 && expiry.length == 6 && cvv.length == 3) {
+            alert("Otp sent");
+            window.location.href = "otp.html"
+        }
+        else if (cardnumber.length != 16 && expiry.length == 6 && cvv.length == 3) {
+            alert("Card number Wrong");
+        }
+        else if (cardnumber.length == 16 && expiry.length != 6 && cvv.length == 3) {
+            alert("expiry Date wrong");
+        }
+        else if (cardnumber.length == 16 && expiry.length == 6 && cvv.length != 3) {
+            alert("CVV wrong");
+        }
+        else if(cardnumber.length == 16 && expiry.length != 6 && cvv.length != 3){
+            alert("Expiry date and CVV wrong");
+        }
+        else if(cardnumber.length != 16 && expiry.length == 6 && cvv.length != 3){
+            alert("Card Number and CVV wrong");
+        }
+        else if(cardnumber.length != 16 && expiry.length != 6 && cvv.length == 3){
+            alert("Card Number and Expiry date wrong");
+        }
+        else{
+            alert("wrong data")
+        }
+    });
+</script>
+
+</html>
